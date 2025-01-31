@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'constants.dart';
 import 'widgets/custom_btm_sheet.dart';
 import 'widgets/notes_view_body.dart';
 
@@ -11,14 +12,18 @@ class NotesView extends StatelessWidget {
     return Scaffold(
       body: const NotesViewBody(),
       floatingActionButton:
-          FloatingActionButton(onPressed: () 
+          FloatingActionButton(
+            backgroundColor: kPrimaryColor,
+            foregroundColor: Colors.black,
+            onPressed: () 
           {
             showModalBottomSheet(context: context, builder: (context)
             {
               return const CustomBtmSheet();
             });
           }, 
-      child: const Icon(Icons.add)),
+      child: const Icon(Icons.add),
+      ),
     );
   }
 }
