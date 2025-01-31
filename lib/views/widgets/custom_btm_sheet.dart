@@ -7,11 +7,14 @@ class CustomBtmSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: 16),
       child: Column(
-        children: const [
+        children: [
           SizedBox(height: 32),
-          CustomTextFiled(),
+          CustomTextFiled( hint: 'Title'),
+          SizedBox(height: 32),
+          CustomTextFiled( hint: 'Content', maxLines: 5),
+          SizedBox(height: 32),
         ],
       ),
     );
