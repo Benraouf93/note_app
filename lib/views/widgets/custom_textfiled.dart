@@ -3,14 +3,17 @@ import 'package:note_app/views/constants.dart';
 
 class CustomTextFiled extends StatelessWidget {
   const CustomTextFiled(
-      {super.key, required this.hint,this.maxLines = 1});
+      {super.key, required this.hint, this.maxLines = 1, this.onSaved});
 
   final String hint;
   final int maxLines;
+  final void Function(String?)? onSaved;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      onSaved: onSaved,
+      validator: (value) => value?.isEmpty ?? true ? "Field required" : null,
       maxLines: maxLines,
       cursorColor: kPrimaryColor,
       decoration: InputDecoration(
