@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../cubits/notes_cubit/notes_cubit.dart';
 import 'constants.dart';
 import 'widgets/custom_btm_sheet.dart';
 import 'widgets/notes_view_body.dart';
@@ -9,21 +11,24 @@ class NotesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: const NotesViewBody(),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: kPrimaryColor,
-        foregroundColor: Colors.black,
-        onPressed: () {
-          showModalBottomSheet(
-            isScrollControlled: true,
-            context: context,
-            builder: (context) {
-              return const CustomBtmSheet();
-            },
-          );
-        },
-        child: const Icon(Icons.add),
+    return BlocProvider(
+      create: (context) => NotesCubit(),
+      child: Scaffold(
+        body: const NotesViewBody(),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: kPrimaryColor,
+          foregroundColor: Colors.black,
+          onPressed: () {
+            showModalBottomSheet(
+              isScrollControlled: true,
+              context: context,
+              builder: (context) {
+                return const CustomBtmSheet();
+              },
+            );
+          },
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }
