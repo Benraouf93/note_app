@@ -16,10 +16,12 @@ class NotesView extends StatelessWidget {
         foregroundColor: Colors.black,
         onPressed: () {
           showModalBottomSheet(
-              context: context,
-              builder: (context) {
-                return const CustomBtmSheet();
-              });
+            isScrollControlled: true,
+            context: context,
+            builder: (context) {
+              return const CustomBtmSheet();
+            },
+          );
         },
         child: const Icon(Icons.add),
       ),
