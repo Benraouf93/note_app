@@ -54,8 +54,7 @@ class NoteItem extends StatelessWidget {
               ),
               trailing: IconButton(
                 onPressed: () {
-                  note.delete();
-                  BlocProvider.of<NotesCubit>(context).fetchAllNotes();
+                  confirmDelete(context);
                 },
                 icon: const Icon(
                   FontAwesomeIcons.trash,
@@ -77,6 +76,37 @@ class NoteItem extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Future<dynamic> confirmDelete(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Warning"),
+          content: const Text("Are you sure you want to delete this note?"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                // Cancel the deletion
+                Navigator.of(context).pop();
+              },
+              child: const Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () {
+                // Perform the deletion
+                // Call your delete function here
+                note.delete();
+                BlocProvider.of<NotesCubit>(context).fetchAllNotes();
+                Navigator.of(context).pop();
+              },
+              child: const Text("Confirm"),
+            ),
+          ],
+        );
+      },
     );
   }
 }

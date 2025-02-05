@@ -27,11 +27,7 @@ class _EditNoteViewBodyState extends State<EditNoteViewBody> {
             title: 'Edit Note',
             icon: Icons.check,
             onPressed: () {
-              widget.note.title = title ?? widget.note.title;
-              widget.note.subtitle = content ?? widget.note.subtitle;
-              widget.note.save();
-              Navigator.pop(context);
-              BlocProvider.of<NotesCubit>(context).fetchAllNotes();
+              confirmEdit(context);
             },
           ),
           const SizedBox(height: 35),
@@ -46,6 +42,42 @@ class _EditNoteViewBodyState extends State<EditNoteViewBody> {
               maxLines: 5),
         ],
       ),
+    );
+  }
+
+  Future<dynamic> confirmEdit(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Confirm Edit"),
+          content:
+              const Text("Are you sure you want to save changes to this note?"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                // Cancel the edit
+                Navigator.of(context).pop();
+              },
+              child: const Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () {
+                // Perform the edit action
+                // Call your edit function here
+                // For example: note.edit();
+                widget.note.title = title ?? widget.note.title;
+                widget.note.subtitle = content ?? widget.note.subtitle;
+                widget.note.save();
+                Navigator.pop(context);
+                BlocProvider.of<NotesCubit>(context).fetchAllNotes();
+                Navigator.of(context).pop();
+              },
+              child: const Text("Confirm"),
+            ),
+          ],
+        );
+      },
     );
   }
 }
