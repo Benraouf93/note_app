@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:note_app/models/note_model.dart';
 
 import '../../cubits/add_note_cubit/add_note_cubit.dart';
+import 'colors_listview.dart';
 import 'custom_button.dart';
 import 'custom_textfiled.dart';
 
@@ -27,15 +28,17 @@ class _AddNoteFormState extends State<AddNoteForm> {
       autovalidateMode: autovalidateMode,
       child: Column(
         children: [
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           CustomTextFiled(onSaved: (value) => title = value, hint: 'Title'),
-          SizedBox(height: 18),
+          const SizedBox(height: 18),
           CustomTextFiled(
             onSaved: (value) => subtitle = value,
             hint: 'Content',
             maxLines: 5,
           ),
-          SizedBox(height: 100),
+          const SizedBox(height: 20),
+          const ListColorItem(),
+          const SizedBox(height: 50),
           BlocBuilder<AddNoteCubit, AddNoteState>(
             builder: (context, state) {
               return CustomButton(
@@ -61,7 +64,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
               );
             },
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
         ],
       ),
     );
